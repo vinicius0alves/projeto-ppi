@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Anuncie.com</title>
+</head>
+
+<body>
+    <header class="home-header">
+        <h1>Anuncie.com</h1>
+        <div class="search-box">
+            <div class="search-announcement">
+                <input type="text" placeholder="Buscar Anúncio">
+            </div>
+        </div>
+    </header>
+
+    <body>
+        <main class="home-main">
+            <template id="template">
+                <div class="card-anuncio">
+                    <div class="image-column">
+                        <img src="../assets/bicicleta.jpg" alt="imagem-anuncio">
+                    </div>
+                    <div class="content-column">
+                        <h3 class="card-name">{{prod-name}}</h3>
+                        <p class="card-price">R$ {{prod-price}}</p>
+                        <p class="card-description">{{prod-description}}</p>
+                    </div>
+                </div>
+            </template>
+        </main>
+
+        <script>
+             window.offset = 0
+
+            function renderProducts(newProducts) {
+
+                const prods = document.querySelector("main");
+                const template = document.getElementById("template");
+
+                for (let product of newProducts) {
+                    let html = template.innerHTML
+                        .replace("{{prod-name}}", product.name)
+                        .replace("{{prod-price}}", product.price)
+                        .replace("{{prod-description}}", product.description);
+
+                    prods.insertAdjacentHTML("beforeend", html);
+                };
+            }
+
+            async function loadProducts() {
+
+                try {
+                    let response = await fetch("get_anuncio.php?offset=" + offset);
+                    if (!response.ok) throw new Error(response.statusText);
+                    var products = await response.json();
+                }
+                catch (e) {
+                    console.error(e);
+                    return;
+                }
+                // Vai pros proximos 6 resultados da query
+                offset = offset + 6;
+                console.log(products);
+                //renderProducts(products);
+            }
+
+            window.onload = function () {
+                loadProducts();
+            }
+
+            window.onscroll = function () {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                    loadProducts();
+                }
+            };
+
+        </script>
+
+    </body>
+
+</html>
