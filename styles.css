@@ -1,0 +1,256 @@
+body {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 0;
+  background-color: #e9f0f5;
+  overflow: auto;
+}
+
+#main-page-login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#login-animate {
+  height: 50vh;
+}
+
+p {
+  text-align: center;
+  font: normal normal normal 20px/30px;
+  letter-spacing: 0px;
+  color: #4f4f4f;
+  opacity: 1;
+}
+
+.col-left {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.col-left > h1 {
+  color: #005290;
+  text-align: center;
+}
+
+.col-right {
+  margin-top: 0;
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box {
+  background-color: white;
+  box-shadow: 0px 10px 40px #00000056;
+  border-radius: 10px;
+  height: 80%;
+  overflow: auto;
+  width: 70%;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 10px 0px;
+}
+
+form {
+  width: 80%;
+}
+
+h4 {
+  color: #005290;
+  cursor: pointer;
+}
+
+.form > input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cac9c9;
+  border-radius: 10px;
+  opacity: 1;
+  box-sizing: border-box;
+  outline: none;
+  margin-top: 5px;
+}
+
+.btn {
+  width: 100%;
+  background: #005290 0% 0% no-repeat padding-box;
+  box-shadow: 0px 10px 30px #00529066;
+  border-radius: 10px;
+  opacity: 1;
+  border: none;
+  text-align: center;
+  font: normal normal bold 20px/32px;
+  letter-spacing: 0px;
+  color: #ffffff;
+  padding: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.home-header {
+  color: white;
+  position: sticky;
+  margin: 0;
+  background-color: #005290;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.search-announcement > input {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+  border: none;
+  padding: 15px;
+  width: 60vw;
+}
+
+.not-found {
+  text-align: center;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.not-found > h2 {
+  font: normal normal normal 20px/30px;
+  letter-spacing: 0px;
+  color: #4f4f4f;
+  opacity: 1;
+}
+
+td {
+  border: 1px solid #005290;
+  padding: 5px;
+}
+
+td > img {
+  width: 100px;
+  height: auto;
+}
+
+.table-announcement {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.price-announcement {
+  font: normal normal normal 20px/30px;
+  letter-spacing: 0px;
+  opacity: 1;
+  color: rgb(rgb(0, 110, 255), green, blue);
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.link-navbar {
+  text-decoration: none;
+  color: white;
+}
+
+#main-page-announcement {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-product {
+  border: 1px solid #005290;
+  width: 40vw;
+}
+
+.announcement-title > h1 {
+  color: #005290;
+  text-align: center;
+  font-size: 35px;
+  margin-top: 5%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-shadow: 1px 1px #2280c9;
+}
+
+.col-left-announcement {
+  width: 50vw;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.col-right-announcement {
+  width: 50vw;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.price-detail-announcement {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+  text-shadow: 0 0 20px #016bbd;
+}
+
+.announcement-image {
+  width: auto;
+  height: 400px;
+}
+
+#announcement-section {
+  margin: auto 5%;
+  color: #555;
+}
+
+#announcement-section > div > p {
+  text-align: left;
+}
+
+input + span {
+  display: none;
+  color: red;
+}
+
+#credentialsError {
+  display: none;
+  color: red;
+  text-align: center;
+}

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Anuncie.com</title>
 </head>
 
@@ -21,21 +21,72 @@
             <div class="form-box">
                 <img src="assets/logo.png" alt="logo_aplicativo">
                 <p>Preencha com seus dados<br>para entrar</p>
-                <form action="user_login.php" method="POST">
+                <form action="user_login.php" id="loginForm">
                     <div class="form">
                         <label for="email">E-mail</label>
-                        <input type="text" id="email" name="email" placeholder="Usuário" required>
+                        <input type="text" id="email" name="email" placeholder="E-mail" required>
                     </div>
                     <div class="form">
-                        <label for="password">Senha</label>
-                        <input type="password" id="password" name="password" placeholder="Senha" required>
+                        <label for="senha">Senha</label>
+                        <input type="password" id="password" name="senha" placeholder="Senha" required>
                     </div>
-                    <button class="btn">Entrar</button>
+                    <div>
+                        <p id="credentialsError">E-mail ou senha inválidos.</p>
+                    </div>
+                    <div>
+                        <button class="btn">Entrar</button>
+                    </div>
                 </form>
                 <a href="register.html">Cadastre-se</a>
             </div>
         </div>
     </main>
+    <script>
+
+        function verificaLogin(form) {
+
+            const options = {
+                method: "POST",
+                body: new FormData(form),
+            }
+
+            let promise = fetch(form.getAttribute("action"), options);
+
+            promise.then(
+                response => {
+                    if (!response.ok) {
+                        console.log("A resposta não pode ser obtida " + response.status)
+                        throw new Error("A resposta não pode ser obtida " + response.status)
+                    } else {
+                        prm = response.json()
+                        prm.then(data => {
+                            console.log(data);
+                            if (data.success) {
+                                window.location = "home.html";
+                            } else {
+                                document.querySelector("#credentialsError").style.display = 'block';
+                                form.email.value = "";
+                                form.password.value = "";
+                                form.password.focus();
+                            }
+                        })
+                    }
+                },
+                error => {
+                    console.log("A resposta não pode ser obtida " + error)
+                }
+            );
+        }
+
+        window.onload = function () {
+            const form = document.querySelector("#loginForm");
+            form.onsubmit = function (e) {
+                verificaLogin(form);
+                e.preventDefault();
+            }
+        }
+    </script>
 </body>
+
 
 </html>

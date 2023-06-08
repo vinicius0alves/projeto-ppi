@@ -1,6 +1,5 @@
 <?php
 
-
 function checkLogin($pdo, $email, $senha)
 {
   $sql = <<<SQL
@@ -10,29 +9,40 @@ function checkLogin($pdo, $email, $senha)
     SQL;
 
   try {
-    // Neste caso utilize prepared statements para prevenir
-    // ataques do tipo SQL Injection, pois precisamos
-    // inserir dados fornecidos pelo usuário na 
-    // consulta SQL (o email do usuário)
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$email]);
     $row = $stmt->fetch();
-    if (!$row) return false; // nenhum resultado (email não encontrado)
+    if (!$row)
+      return false; // nenhum resultado (email não encontrado)
 
     return password_verify($senha, $row['hash_senha']);
-  } 
-  catch (Exception $e) {
+  } catch (Exception $e) {
     exit('Falha inesperada: ' . $e->getMessage());
   }
 }
 
-require "../conexaoMysql.php";
+class RequestResponse
+{
+  public $success;
+  public $detail;
+
+  function __construct($success, $detail)
+  {
+    $this->success = $success;
+    $this->detail = $detail;
+  }
+}
+
+require "conexaoMysql.php";
 $pdo = mysqlConnect();
 
 $email = $_POST["email"] ?? "";
 $senha = $_POST["senha"] ?? "";
 
 if (checkLogin($pdo, $email, $senha))
-  header("location: home.html");
+  $response = new RequestResponse(true, 'home.html');
 else
-  header("location: login.html");
+  $response = new RequestResponse(false, '');
+
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode($response);
